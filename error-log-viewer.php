@@ -110,6 +110,25 @@ function yd_ve_error_log_viewer_page()
     echo '</div></div>';
 }
 
+add_action('admin_notices', 'yd_ve_check_debug_settings');
+
+function yd_ve_check_debug_settings()
+{
+    if (!current_user_can('manage_options')) return;
+
+    $debug_enabled     = defined('WP_DEBUG') && WP_DEBUG;
+    $debug_log_enabled = defined('WP_DEBUG_LOG') && WP_DEBUG_LOG;
+
+    if (!$debug_enabled || !$debug_log_enabled) {
+        echo '<div class="notice notice-error">';
+        echo '<p><strong>Atención:</strong> El log de errores de WordPress no está activo.</p>';
+        echo '<p>Asegúrate de tener estas líneas en tu <code>wp-config.php</code>:</p>';
+        echo '<pre style="background:#f1f1f1; padding:10px; border-radius:5px;">define(\'WP_DEBUG\', true);
+define(\'WP_DEBUG_LOG\', true);</pre>';
+        echo '</div>';
+    }
+}
+
 
 // Hook para mostrar aviso en el admin si hay nuevos errores
 add_action('admin_notices', 'yd_ve_show_new_errors_notice');
