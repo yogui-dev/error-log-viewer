@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: Visor de Errores
+ * Plugin Name: Error Log Viewer
  * Description: Muestra, descarga y limpia el archivo debug.log desde el panel de administración, con filtro y resaltado.
  * Version: 1.3.0
  * Author: Yogui Dev
@@ -17,8 +17,8 @@ add_action('admin_menu', 'yd_ve_error_log_viewer_menu');
 function yd_ve_error_log_viewer_menu()
 {
     add_menu_page(
-        'Visor de Errores',
-        'Visor de Errores',
+        'Error Log Viewer',
+        'Error Log Viewer',
         'manage_options',
         'em-error-log-viewer',
         'yd_ve_error_log_viewer_page',
@@ -58,7 +58,7 @@ function yd_ve_error_log_viewer_page()
     }
 
 
-    echo '<div class="wrap"><h1>Visor de Errores (debug.log)</h1>';
+    echo '<div class="wrap"><h1>Error Log Viewer (debug.log)</h1>';
 
     if (!file_exists(YD_VE_ERROR_LOG_PATH)) {
         echo '<p><strong>No se encontró el archivo debug.log.</strong></p></div>';
