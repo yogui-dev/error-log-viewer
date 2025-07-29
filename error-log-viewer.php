@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Visor de Errores
  * Description: Muestra, descarga y limpia el archivo debug.log desde el panel de administración, con filtro y resaltado.
- * Version: 1.3
+ * Version: 1.3.0
  * Author: Yogui Dev
  * Author URI: https://github.com/yogui-dev
  */
