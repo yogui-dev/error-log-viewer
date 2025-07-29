@@ -20,7 +20,7 @@ function yd_ve_error_log_viewer_menu()
         'Error Log Viewer',
         'Error Log Viewer',
         'manage_options',
-        'em-error-log-viewer',
+        'yd-ve-error-log-viewer',
         'yd_ve_error_log_viewer_page',
         'dashicons-warning',
         80
@@ -77,12 +77,12 @@ function yd_ve_error_log_viewer_page()
     $search_term = isset($_GET['s']) ? sanitize_text_field($_GET['s']) : '';
 
     echo '<form method="get" style="margin-bottom:10px;">';
-    echo '<input type="hidden" name="page" value="em-error-log-viewer" />';
+    echo '<input type="hidden" name="page" value="yd-ve-error-log-viewer" />';
     echo '<input type="text" name="s" value="' . esc_attr($search_term) . '" placeholder="Buscar en el log..." />';
     echo '<button class="button">Buscar</button>';
     echo '</form>';
 
-    echo '<p><a class="button button-primary" href="' . admin_url('admin.php?page=em-error-log-viewer&download=1') . '">📥 Descargar log</a></p>';
+    echo '<p><a class="button button-primary" href="' . admin_url('admin.php?page=yd-ve-error-log-viewer&download=1') . '">📥 Descargar log</a></p>';
 
     echo '<form method="post" style="margin-top:10px;">';
     wp_nonce_field('yd_ve_clear_log');
@@ -148,7 +148,7 @@ function yd_ve_show_new_errors_notice()
         $size_diff = $current_size - $stored_size;
         echo '<div class="notice notice-warning is-dismissible">';
         echo '<p><strong>Nuevo error detectado:</strong> El archivo <code>debug.log</code> ha aumentado en <code>' . size_format($size_diff) . '</code>. ';
-        echo '<a href="' . admin_url('admin.php?page=em-error-log-viewer') . '">Revisar log</a>.</p>';
+        echo '<a href="' . admin_url('admin.php?page=yd-ve-error-log-viewer') . '">Revisar log</a>.</p>';
         echo '</div>';
     }
 }
@@ -157,7 +157,7 @@ function yd_ve_show_new_errors_notice()
 add_action('admin_init', function () {
     if (!current_user_can('manage_options')) return;
 
-    if (isset($_GET['page']) && $_GET['page'] === 'em-error-log-viewer') {
+    if (isset($_GET['page']) && $_GET['page'] === 'yd-ve-error-log-viewer') {
         if (file_exists(YD_VE_ERROR_LOG_PATH)) {
             update_option('yd_ve_error_log_last_size', filesize(YD_VE_ERROR_LOG_PATH));
         }
@@ -178,7 +178,7 @@ function yd_ve_list_old_logs($selected_file = '')
     echo '<ul style="list-style-type:disc; padding-left:20px;">';
     foreach ($files as $file) {
         $basename = basename($file);
-        $link = admin_url('admin.php?page=em-error-log-viewer&logfile=' . urlencode($basename));
+        $link = admin_url('admin.php?page=yd-ve-error-log-viewer&logfile=' . urlencode($basename));
         $active = ($basename === $selected_file) ? 'font-weight:bold;' : '';
         echo '<li><a href="' . esc_url($link) . '" style="' . $active . '">' . esc_html($basename) . '</a></li>';
     }
